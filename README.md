@@ -57,4 +57,43 @@ An analysis of two years of transactions from a UK online gift retailer (1 Decem
 
 ## Tools
 
-Python (pandas, NumPy, matplotlib), SQL (SQLite), Git, Jupyter.
+Python (pandas, NumPy, matplotlib), SQL (SQLite), Git, Jupyter, Power BI (DAX, Power Query)
+
+## Power BI dashboard
+
+An interactive three-page dashboard built in Power BI Desktop on the same cleaned data
+(`online-retail-dashboard.pbix`; a PDF export is in `figures/`).
+
+### Overview
+![Overview page](figures/dashboard_overview.png)
+
+- Total revenue of £19.23M from 39,361 orders and 5,849 identified customers (average order value £488.67).
+- Revenue peaks every November, in both 2010 and 2011, consistent with Christmas gift buying.
+- The UK provides about 85% of revenue; the remaining countries share about 15%.
+
+### Customers
+![Customers page](figures/dashboard_customers.png)
+
+- Core high-value customers are 20% of identified customers but provide 73% of their revenue.
+- Revenue per customer decomposes into orders per customer × average order value. Core customers
+  place about 19 orders each against about 1.4 for lost one-time buyers (a factor of about 14),
+  while their average order value is only about 2.4 times higher. The core segment is defined
+  mainly by repeat purchasing.
+- Lapsing regulars still provide about 17% of revenue, which makes them the clearest retention target.
+
+### Products
+![Products page](figures/dashboard_products.png)
+
+- Revenue leaders and volume leaders differ. The top earner (Regency Cakestand 3 Tier, average price
+  above £7) is absent from the top 10 by units, while the top seller by units (World War 2 Gliders,
+  average price below £0.70) is absent from the top 10 by revenue.
+
+### Modelling notes
+- Star schema: `invoice_lines` linked many-to-one to `invoices` and `products`, `invoices` linked
+  to `customers`, plus a calendar table marked as the date table.
+- Measures are written in DAX, and share measures use `ALL()` to compute a denominator across all segments.
+- Stock codes were standardised to uppercase, because Power BI matches text case-insensitively and
+  codes differing only in case would otherwise break the product relationship.
+- About 13% of revenue (£2.57M) comes from orders without a customer ID. These are included in
+  the overall figures but excluded from segment shares.
+- December 2011 contains only nine days of data, so it is excluded from the monthly trend chart.
