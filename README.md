@@ -57,7 +57,7 @@ An analysis of two years of transactions from a UK online gift retailer (1 Decem
 
 ## Tools
 
-Python (pandas, NumPy, matplotlib), SQL (SQLite), Git, Jupyter, Power BI (DAX, Power Query)
+Python (pandas, NumPy, matplotlib), SQL (SQLite), Git, Jupyter, Power BI (DAX, Power Query).
 
 ## Power BI dashboard
 
